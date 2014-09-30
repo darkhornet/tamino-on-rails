@@ -1,0 +1,15 @@
+﻿<person>
+<name>
+  <lastName>Schulz-Hofen</lastName>
+  <firstName>Jan</firstName>
+
+</name>
+<address>
+  <street>
+
+    <number>94</number>
+    <name>Kantstrasse</name>
+  </street>
+  <city>Berlin</city>
+</address>
+</person>

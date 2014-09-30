@@ -1,0 +1,13 @@
+﻿<person>
+<name>
+  <firstName>Franz</firstName>
+  <lastName>Müller</lastName>
+</name>
+<address>
+  <street>
+    <name>Friedrichstraße</name>
+    <number>25a</number>
+  </street>
+  <city>Darmstadt</city>
+</address>
+</person>

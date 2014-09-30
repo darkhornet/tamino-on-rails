@@ -1,0 +1,8 @@
+<h1>Store a new XML document in Tamino</h1>
+<%= form_tag({:action => "store"  }, {:multipart => true }) %>
+  <label for="name">Collection name:</label> <%= text_field_tag "collection", "people" %><br/> 
+  <label for="encoding">Encoding:</label> <%= text_field_tag "encoding", "UTF-8"%><br/> 
+  <label for="uploaded_file">Data file: </label><%= file_field_tag "uploaded_file" %><br/>
+  <%= submit_tag "Store" %>
+<%= end_form_tag %>
+  

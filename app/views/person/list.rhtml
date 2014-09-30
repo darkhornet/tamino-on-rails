@@ -1,0 +1,25 @@
+<h1>People list</h1>
+
+<table border=1>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Actions</th>
+    </tr>
+    <% @people.each do |person| %>
+        <tr>
+            <td><%= person.id %></td>
+            <td><%= "#{person.name.firstName} #{person.name.lastName}" %></td>
+            <td><%= "#{person.address.street.name} #{person.address.street.number}" %></td>
+            <td><%= person.address.city %></td>
+            <td>
+	    <%= link_to "Show", {:action => "show", :id => person.id} %>,
+	    <%= link_to "Edit", {:action => "edit", :id => person.id} %>,
+	    <%= link_to "Delete", {:action => "delete", :id => person.id} %>
+	  </td>
+        </tr>
+    <% end %>
+</table>
+<%= link_to "Create...", {:action => "create"} %>

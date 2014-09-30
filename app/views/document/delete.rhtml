@@ -1,0 +1,8 @@
+<h1>Delete a Document from Tamino</h1>
+<%= form_tag({:action => "delete"  }) %>
+  <label for="name">Collection name:</label> <%= text_field_tag "collection", "people" %><br/> 
+  <label for="name">Document:</label> <%= text_field_tag "document", "/person[@ino:id=1]" %> (X-Query)<br/> 
+
+  <%= submit_tag "Undefine" %>
+<%= end_form_tag %>
+  

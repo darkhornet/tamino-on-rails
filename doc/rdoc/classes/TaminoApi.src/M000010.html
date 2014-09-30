@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>fetchCursor (TaminoApi)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib\tamino_api\tamino_api.rb, line 354</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fetchCursor</span>(<span class="ruby-identifier">sCursorHandle</span>, <span class="ruby-identifier">iPosition</span>, <span class="ruby-identifier">iQuantity</span>)
+    
+    <span class="ruby-keyword kw">if</span> ((<span class="ruby-identifier">sCursorHandle</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">getCursorHandle</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">iPosition</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">iQuantity</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>))
+      <span class="ruby-identifier">raise</span>    <span class="ruby-node">&quot;The Cursor handler can not be fetched: &lt;br/&gt;CursorHandle: \&quot;#{sCursorHandle}\&quot;&lt;br/&gt;Position: \&quot;#{iPosition}\&quot;&lt;br/&gt;Quantity: \&quot;#{iQuantity}\&quot;&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-ivar">@_bReturnValue</span> = <span class="ruby-keyword kw">true</span>
+    
+    <span class="ruby-identifier">sParameters</span>  = <span class="ruby-node">&quot;&amp;#{TAMINO_OP_POSITION}=#{iPosition}&quot;</span>
+    <span class="ruby-identifier">sParameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&amp;#{TAMINO_OP_QUANTITY}=#{iQuantity}&quot;</span>
+    <span class="ruby-identifier">sParameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&amp;#{TAMINO_OP_HANDLE}=#{sCursorHandle}&quot;</span>
+    
+    <span class="ruby-identifier">sMore</span> = <span class="ruby-node">&quot;Content-Disposition: form-data; name=\&quot;#{TAMINO_OP_POSITION}\&quot;\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{iPosition}\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{TAMINO_MULTIPART_BOUNDARY_START}&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Content-Disposition: form-data; name=\&quot;#{TAMINO_OP_QUANTITY}\&quot;\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{iQuantity}\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{TAMINO_MULTIPART_BOUNDARY_START}&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Content-Disposition: form-data; name=\&quot;#{TAMINO_OP_HANDLE}\&quot;\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\r\n&quot;</span>
+    <span class="ruby-identifier">sMore</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sCursorHandle</span>
+    
+    <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@_sHttpRequestMethod</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;GET&quot;</span> 
+      <span class="ruby-identifier">_sendRequestUsingGet</span>(<span class="ruby-ivar">@_sCollection</span>, <span class="ruby-constant">TAMINO_OP_CURSOR</span>, <span class="ruby-value str">&quot;fetch&quot;</span>, <span class="ruby-identifier">sParameters</span>)
+    <span class="ruby-keyword kw">else</span> 
+      <span class="ruby-identifier">_sendRequestUsingPost</span>(<span class="ruby-ivar">@_sCollection</span>, <span class="ruby-constant">TAMINO_OP_CURSOR</span>, <span class="ruby-value str">&quot;fetch&quot;</span>, <span class="ruby-identifier">sMore</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">getHeaderResponse</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@_bReturnValue</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

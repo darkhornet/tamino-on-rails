@@ -1,0 +1,12 @@
+<h1>Query a Document or Data from Tamino</h1>
+<%= form_tag({:action => "query"  }) %>
+  <label for="name">Collection name:</label> <%= text_field_tag "collection", "people" %><br/> 
+  <label for="name">Query string:</label> <%= text_field_tag "query", "/person/name[firstName=\"Franz\"]" %> (X-Query)<br/> 
+
+  <%= submit_tag "Query" %>
+<%= end_form_tag %>
+
+<pre>
+<%= CGI::escapeHTML @result_xml %>
+</pre>
+  

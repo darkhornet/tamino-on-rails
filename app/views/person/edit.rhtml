@@ -1,0 +1,21 @@
+<h1>Edit person:<%= @person.id %></h1>
+
+<% form_tag do -%>
+<dl>
+    <dt>Firstname:</dt>
+    <dd><%= text_field_tag "firstname", (@person.name.firstName rescue "") %></dd>
+
+    <dt>Lastname:</dt>
+    <dd><%= text_field_tag "lastname", (@person.name.lastName rescue "") %></dd>
+
+    <dt>Street name:</dt>
+    <dd><%= text_field_tag "streetname", (@person.address.street.name rescue "") %></dd>
+
+    <dt>Street number:</dt>
+    <dd><%= text_field_tag "streetnumber", (@person.address.street.number rescue "") %></dd>
+
+    <dt>City:</dt>
+    <dd><%= text_field_tag "city", (@person.address.city rescue "") %></dd>
+</dl>
+<%= submit_tag %>
+<% end -%>

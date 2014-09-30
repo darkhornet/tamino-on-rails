@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (TaminoApi)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib\tamino_api\tamino_api.rb, line 142</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">sConnectHost</span>, <span class="ruby-identifier">iConnectPort</span>, <span class="ruby-identifier">sDatabaseName</span>, <span class="ruby-identifier">sAuthUsername</span>, <span class="ruby-identifier">sAuthPassword</span>)
+    
+    <span class="ruby-comment cmt"># set passed values</span>
+    <span class="ruby-ivar">@_sConnectHost</span> = <span class="ruby-identifier">sConnectHost</span>
+    <span class="ruby-ivar">@_iConnectPort</span> = <span class="ruby-identifier">iConnectPort</span>
+    <span class="ruby-ivar">@_sDatabaseName</span> = <span class="ruby-identifier">sDatabaseName</span>
+    <span class="ruby-ivar">@_sAuthUsername</span> = <span class="ruby-identifier">sAuthUsername</span>
+    <span class="ruby-ivar">@_sAuthPassword</span> = <span class="ruby-identifier">sAuthPassword</span>
+    
+    <span class="ruby-comment cmt"># set initial default values</span>
+    <span class="ruby-ivar">@_bDebugOn</span> = <span class="ruby-keyword kw">false</span>
+    <span class="ruby-ivar">@_bSessionActive</span> = <span class="ruby-keyword kw">false</span>
+    <span class="ruby-ivar">@_bSessionStarting</span> = <span class="ruby-keyword kw">false</span>
+    <span class="ruby-ivar">@_sEncoding</span> = <span class="ruby-value str">&quot;UTF-8&quot;</span>
+    <span class="ruby-ivar">@_sHttpRequestMethod</span> = <span class="ruby-value str">&quot;GET&quot;</span>
+    <span class="ruby-ivar">@_sCursorScroll</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_sCursorSensitive</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_bCursorOpened</span> = <span class="ruby-keyword kw">false</span>
+    <span class="ruby-ivar">@_sCursorLastHandle</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_sMediaType</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_countCreateDom</span> = <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@_countFreeDom</span> = <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@_sContentTransferEncoding</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_sIsolationLevel</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_sLockMode</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_sLockWait</span> = <span class="ruby-value str">&quot;&quot;</span>
+    
+    <span class="ruby-ivar">@_sHeaderHttpServerName</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_sHeaderMessageText</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_sHeaderReason</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_sHeaderResponseWrapper</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@_iHeaderReturnValue</span> = <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@_sHeaderXmlServerVersion</span> = <span class="ruby-value str">&quot;unknown&quot;</span>
+    
+    <span class="ruby-ivar">@_domResultBody</span> = <span class="ruby-keyword kw">nil</span>
+    
+    
+    
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

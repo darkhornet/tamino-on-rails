@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>diagnose (TaminoApi)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib\tamino_api\tamino_api.rb, line 310</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">diagnose</span>(<span class="ruby-identifier">sFunctionName</span>)
+    
+    <span class="ruby-ivar">@_bReturnValue</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-identifier">_sendRequest</span>(<span class="ruby-ivar">@_sCollection</span>, <span class="ruby-constant">TAMINO_OP_DIAGNOSE</span>, <span class="ruby-identifier">sFunctionName</span>)
+    <span class="ruby-identifier">getHeaderResponse</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@_bReturnValue</span>;
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

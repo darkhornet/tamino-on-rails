@@ -1,0 +1,95 @@
+# Logfile created on Thu Dec 28 12:04:19 +0100 2006 by logger.rb/1.5.2.9
+D, [2006-12-28T12:04:19.564000 #2280] DEBUG -- : TRACING ON Thu Dec 28 12:04:19 +0100 2006
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+
+D, [2006-12-28T12:04:24.538000 #4824] DEBUG -- : TRACING ON Thu Dec 28 12:04:24 +0100 2006
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+
+D, [2006-12-28T12:04:27.895000 #3124] DEBUG -- : TRACING ON Thu Dec 28 12:04:27 +0100 2006
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+
+D, [2006-12-28T12:04:41.750000 #192] DEBUG -- : TRACING ON Thu Dec 28 12:04:41 +0100 2006
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+
+D, [2006-12-28T12:04:43.958000 #904] DEBUG -- : TRACING ON Thu Dec 28 12:04:43 +0100 2006
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+
+D, [2006-12-28T12:04:46.175000 #5724] DEBUG -- : TRACING ON Thu Dec 28 12:04:46 +0100 2006
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+
+D, [2006-12-28T12:04:48.333000 #672] DEBUG -- : TRACING ON Thu Dec 28 12:04:48 +0100 2006
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+
+D, [2006-12-28T12:08:43.604000 #5716] DEBUG -- : TRACING ON Thu Dec 28 12:08:43 +0100 2006
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+
+D, [2006-12-28T12:37:48.005000 #1752] DEBUG -- : TRACING ON Thu Dec 28 12:37:48 +0100 2006
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+D:/INSTAN~1/rails_apps/taminoonrails/config/../log/development.log: 1
+
+D, [2006-12-28T13:31:40.173000 #3344] DEBUG -- : TRACING ON Thu Dec 28 13:31:40 +0100 2006
+D, [2007-05-06T15:00:07.599000 #4512] DEBUG -- : TRACING ON Sun May 06 15:00:07 +0200 2007
+D, [2007-05-06T15:07:37.353000 #7796] DEBUG -- : TRACING ON Sun May 06 15:07:37 +0200 2007
+D, [2007-05-06T15:12:23.394000 #8116] DEBUG -- : TRACING ON Sun May 06 15:12:23 +0200 2007
+D, [2007-05-06T15:14:03.238000 #6944] DEBUG -- : TRACING ON Sun May 06 15:14:03 +0200 2007
+D, [2007-05-06T15:14:34.994000 #6404] DEBUG -- : TRACING ON Sun May 06 15:14:34 +0200 2007
+D, [2007-05-06T15:16:28.817000 #4992] DEBUG -- : TRACING ON Sun May 06 15:16:28 +0200 2007
+D, [2007-05-08T17:53:14.664000 #6480] DEBUG -- : TRACING ON Tue May 08 17:53:14 +0200 2007
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+D:/INSTAN~1/rails_apps/taminoonrails/config/../log/development.log: 1
+
+D, [2007-05-08T17:55:34.910000 #5484] DEBUG -- : TRACING ON Tue May 08 17:55:34 +0200 2007
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+D:/INSTAN~1/rails_apps/taminoonrails/config/../log/development.log: 1
+
+D, [2007-05-08T18:10:50.990000 #7272] DEBUG -- : TRACING ON Tue May 08 18:10:50 +0200 2007
+D, [2007-05-08T18:36:59.942000 #7472] DEBUG -- : TRACING ON Tue May 08 18:36:59 +0200 2007
+D, [2007-05-08T19:01:13.736000 #5736] DEBUG -- : TRACING ON Tue May 08 19:01:13 +0200 2007
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+D:/INSTAN~1/rails_apps/taminoonrails/config/../log/development.log: 1
+
+D, [2007-05-08T19:04:56.186000 #6048] DEBUG -- : TRACING ON Tue May 08 19:04:56 +0200 2007
+D, [2007-05-09T10:56:27.116000 #256] DEBUG -- : TRACING ON Wed May 09 10:56:27 +0200 2007
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+D:/INSTAN~1/rails_apps/taminoonrails/config/../log/development.log: 1
+
+D, [2007-05-09T11:14:08.406000 #836] DEBUG -- : TRACING ON Wed May 09 11:14:08 +0200 2007
+D, [2007-05-09T11:24:21.715000 #5104] DEBUG -- : TRACING ON Wed May 09 11:24:21 +0200 2007
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+D:/INSTAN~1/rails_apps/taminoonrails/config/../log/development.log: 1
+
+D, [2007-05-09T11:39:55.468000 #4692] DEBUG -- : TRACING ON Wed May 09 11:39:55 +0200 2007
+FILES OPEN AT EXIT
+--- 
+log/mongrel_debug/files.log: 1
+D:/INSTAN~1/rails_apps/taminoonrails/config/../log/development.log: 1
+
+D, [2007-05-09T11:46:10.681000 #3780] DEBUG -- : TRACING ON Wed May 09 11:46:10 +0200 2007

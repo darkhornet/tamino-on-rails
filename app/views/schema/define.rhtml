@@ -1,0 +1,7 @@
+<h1>Define a Schema in Tamino</h1>
+<%= form_tag({:action => "define"  }, {:multipart => true }) %>
+<!--  <label for="name"> Schema name:</label> <%= text_field_tag "name" %><br/> -->
+  <label for="uploaded_file"> Schema definition file: </label><%= file_field_tag "uploaded_file" %><br/>
+  <%= submit_tag "Define" %>
+<%= end_form_tag %>
+  

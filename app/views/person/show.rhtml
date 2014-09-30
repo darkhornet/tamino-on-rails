@@ -1,0 +1,18 @@
+<h1>Showing person:<%= @person.id %></h1>
+
+<dl>
+    <dt>Firstname:</dt>
+    <dd><%= @person.name.firstName %></dd>
+
+    <dt>Lastname:</dt>
+    <dd><%= @person.name.lastName %></dd>
+
+    <dt>Street name:</dt>
+    <dd><%= @person.address.street.name %></dd>
+
+    <dt>Street number:</dt>
+    <dd><%= @person.address.street.number %></dd>
+
+    <dt>City:</dt>
+    <dd><%= @person.address.city %></dd>
+</dl>

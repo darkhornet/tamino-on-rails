@@ -1,0 +1,1823 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: TaminoApi</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">TaminoApi</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib\tamino_api/tamino_api_rb.html">
+                lib\tamino_api\tamino_api.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Ruby Tamino API</h1>
+<p>
+The Ruby Tamino API allows developers to interface with the Software AG
+Tamino XML Server. It uses Tamino&#8216;s HTTP interface to execute
+commands.
+</p>
+<p>
+The archive which you just downloaded is actually a sample Ruby on Rails
+(RoR) web application which is meant to demonstrate the use of the Ruby
+Tamino API. The installation guide included in this document will explain
+how to install and run the sample application. If you just want to use the
+Ruby API and build your own applications on top of it, all you need to to
+is copy <tt>lib/tamino_api</tt> into your own Ruby projects.
+</p>
+<h2>Try the Tamino API using the sample project</h2>
+<p>
+If you are <a href="TaminoApi.html#M000001">new</a> to RoR and using
+Windows, it is recommended that you download and install InstantRails from
+<a href="http://instantrails.rubyforge.org">instantrails.rubyforge.org</a>/
+and install it according to the instructions provided with it. But of
+course, any other working RoR installation is fine.
+</p>
+<p>
+To setup the the Ruby Tamino API project just change the Tamino connection
+parameters in <tt>config/environment.rb</tt>.
+</p>
+<p>
+Change the following parameters according to your setup:
+</p>
+<pre>
+ TAMINO = TaminoApi.new(
+   &lt;TAMINO_HOST&gt;,
+   &lt;TAMINO_PORT&gt;,
+   &lt;DATABASE_NAME&gt;,
+   &lt;USERNAME&gt;,
+   &lt;PASSWORD&gt;
+ )
+</pre>
+<p>
+Now you should be able to access the following URLs to try out the
+API&#8216;s functionality (you may need to change the port number according
+to your setup):
+</p>
+<ul>
+<li><a
+href="http://localhost:3000/schema/define">localhost:3000/schema/define</a>
+
+</li>
+<li><a
+href="http://localhost:3000/schema/undefine">localhost:3000/schema/undefine</a>
+
+</li>
+<li><a
+href="http://localhost:3000/document/store">localhost:3000/document/store</a>
+
+</li>
+<li><a
+href="http://localhost:3000/document/query">localhost:3000/document/query</a>
+
+</li>
+<li><a
+href="http://localhost:3000/document/delete">localhost:3000/document/delete</a>
+
+</li>
+</ul>
+<p>
+You will find a sample schema and sample data in <tt>doc/examples</tt>
+directory in this archive which allow you to create entries in your Tamino
+XML database.
+</p>
+<h2>Use the Tamino API on your own</h2>
+<p>
+In order to use the Tamino API, you have to instanciate the <a
+href="TaminoApi.html">TaminoApi</a> class and pass connection parameters to
+the constructor (just like you did before).
+</p>
+<p>
+Example:
+</p>
+<pre>
+ TAMINO = TaminoApi.new(
+   &quot;localhost&quot;,     # host, Tamino is running on
+   80,              # port, Tamino is listening on
+   &quot;welcome_4_4_1&quot;, # database name
+   &quot;john.doe&quot;,      # username
+   &quot;secret&quot;         # password
+ )
+</pre>
+<p>
+After instanciating, the <tt>TAMINO</tt> object can be used to send
+commands to Tamino and receive responses.
+</p>
+<p>
+Example:
+</p>
+<pre>
+ TAMINO.setHttpRequestMethod(&quot;POST&quot;)
+ TAMINO.setCollection(&quot;myAddresses&quot;)
+ if TAMINO.query(&quot;/person/name[firstName=\&quot;Franz\&quot;]&quot;)
+   xml = TAMINO.getResultDomNode.to_s
+ end
+</pre>
+<p>
+<em>Note: The Tamino API was ported to Ruby from PHP. The PHP API can be
+downloaded from <a
+href="http://developer.softwareag.com/tamino/phpapi/download.htm">developer.softwareag.com/tamino/phpapi/download.htm</a>.
+Additional information regarding the PHP API can be found here: <a
+href="http://xml-magazin.de/itr/online_artikel/psecom,id,399,nodeid,69.html">xml-magazin.de/itr/online_artikel/psecom,id,399,nodeid,69.html</a></em>
+</p>
+<h2>License</h2>
+<p>
+Copyright 2007 Software AG, Authored by: Jan Schulz-Hofen
+</p>
+<p>
+Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License. You may
+obtain a copy of the License at
+</p>
+<pre>
+ http://www.apache.org/licenses/LICENSE-2.0
+</pre>
+<p>
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000002">__destruct</a>&nbsp;&nbsp;
+      <a href="#M000003">admin</a>&nbsp;&nbsp;
+      <a href="#M000004">closeCursor</a>&nbsp;&nbsp;
+      <a href="#M000005">commit</a>&nbsp;&nbsp;
+      <a href="#M000006">define</a>&nbsp;&nbsp;
+      <a href="#M000007">delete</a>&nbsp;&nbsp;
+      <a href="#M000008">diagnose</a>&nbsp;&nbsp;
+      <a href="#M000009">endSession</a>&nbsp;&nbsp;
+      <a href="#M000010">fetchCursor</a>&nbsp;&nbsp;
+      <a href="#M000011">getCursorHandle</a>&nbsp;&nbsp;
+      <a href="#M000012">getFullResultBody</a>&nbsp;&nbsp;
+      <a href="#M000013">getFullResultDom</a>&nbsp;&nbsp;
+      <a href="#M000014">getFullResultHeader</a>&nbsp;&nbsp;
+      <a href="#M000015">getHeaderHttpServerName</a>&nbsp;&nbsp;
+      <a href="#M000016">getHeaderMessageText</a>&nbsp;&nbsp;
+      <a href="#M000017">getHeaderReason</a>&nbsp;&nbsp;
+      <a href="#M000018">getHeaderResponse</a>&nbsp;&nbsp;
+      <a href="#M000019">getHeaderReturnResponse</a>&nbsp;&nbsp;
+      <a href="#M000020">getHeaderXmlServerVersion</a>&nbsp;&nbsp;
+      <a href="#M000021">getResultDomNode</a>&nbsp;&nbsp;
+      <a href="#M000022">getResultHttpCode</a>&nbsp;&nbsp;
+      <a href="#M000023">getResultMessageCode1</a>&nbsp;&nbsp;
+      <a href="#M000024">getResultMessageCode2</a>&nbsp;&nbsp;
+      <a href="#M000025">getResultMessageLine1</a>&nbsp;&nbsp;
+      <a href="#M000026">getResultMessageLine2</a>&nbsp;&nbsp;
+      <a href="#M000027">getResultMessageText1</a>&nbsp;&nbsp;
+      <a href="#M000028">getResultMessageText2</a>&nbsp;&nbsp;
+      <a href="#M000029">getRootDomNode</a>&nbsp;&nbsp;
+      <a href="#M000030">isDomCreated</a>&nbsp;&nbsp;
+      <a href="#M000001">new</a>&nbsp;&nbsp;
+      <a href="#M000031">openCursor</a>&nbsp;&nbsp;
+      <a href="#M000032">plainUrlAddressing</a>&nbsp;&nbsp;
+      <a href="#M000033">process</a>&nbsp;&nbsp;
+      <a href="#M000034">query</a>&nbsp;&nbsp;
+      <a href="#M000035">rollback</a>&nbsp;&nbsp;
+      <a href="#M000036">setCollection</a>&nbsp;&nbsp;
+      <a href="#M000037">setContentTransferEncoding</a>&nbsp;&nbsp;
+      <a href="#M000038">setDefineMode</a>&nbsp;&nbsp;
+      <a href="#M000039">setEncoding</a>&nbsp;&nbsp;
+      <a href="#M000040">setHttpRequestMethod</a>&nbsp;&nbsp;
+      <a href="#M000041">setIsolationLevel</a>&nbsp;&nbsp;
+      <a href="#M000042">setLockMode</a>&nbsp;&nbsp;
+      <a href="#M000043">setLockWait</a>&nbsp;&nbsp;
+      <a href="#M000044">setMediaType</a>&nbsp;&nbsp;
+      <a href="#M000045">setPassword</a>&nbsp;&nbsp;
+      <a href="#M000046">setUsername</a>&nbsp;&nbsp;
+      <a href="#M000047">startSession</a>&nbsp;&nbsp;
+      <a href="#M000048">undefine</a>&nbsp;&nbsp;
+      <a href="#M000049">xquery</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_CONNECT</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_connect&quot;</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+operation constants
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_COMMIT</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_commit&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_CURSOR</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_cursor&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_DEFINE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_define&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_DELETE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_delete&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_DIAGNOSE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_diagnose&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_DISCONNECT</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_disconnect&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_ENCODING</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_encoding&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_HANDLE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_handle&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_ISOLATIONLEVEL</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_isolationLevel&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_LOCKMODE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_lockMode&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_LOCKWAIT</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_lockWait&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_MODE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_mode&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_POSITION</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_position&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_PROCESS</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_process&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_QUANTITY</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_quantity&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_ROLLBACK</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_rollback&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_SCROLL</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_scroll&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_SENSITIVE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_sensitive&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_UNDEFINE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_undefine&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_XQUERY</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_xquery&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_XQL</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;_xql&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_OP_PURLA</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;plainUrlAddressing&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_DEFINE_MODE_NORMAL</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;&quot;</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+other constants
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_DEFINE_MODE_TEST</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;test&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_DEFINE_MODE_VALIDATE</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;validate&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_DEFINE_MODE_VALIDATETEST</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;test,validate&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_MULTIPART_BOUNDARY</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;TaminoApiMultipartBoundary&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_MULTIPART_BOUNDARY_START</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;--#{TAMINO_MULTIPART_BOUNDARY}&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TAMINO_MULTIPART_BOUNDARY_END</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;--#{TAMINO_MULTIPART_BOUNDARY}--&quot;</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000001.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000001.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(sConnectHost, iConnectPort, sDatabaseName, sAuthUsername, sAuthPassword)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+constructor for the TaminoAPI class
+</p>
+<table>
+<tr><td valign="top">sConnectHost (string, in):</td><td>name or IP address of the host where the web server hosting the Tamino web
+server module is running
+
+</td></tr>
+<tr><td valign="top">iConnectPort (integer, in):</td><td>port on which the web server is listening
+
+</td></tr>
+<tr><td valign="top">sDatabaseName (string, in):</td><td>name of the Tamino database
+
+</td></tr>
+<tr><td valign="top">sAuthUsername (string, in):</td><td>name of the user to connect with - if an empty string is set, no
+authentication header will be sent to Tamino
+
+</td></tr>
+<tr><td valign="top">sAuthPassword (string, in):</td><td>password of the user
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>void
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000002.html');return false;">
+          <span class="method-name">__destruct</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+destructor for the TaminoAPI class
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>void
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000003.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000003.html');return false;">
+          <span class="method-name">admin</span><span class="method-args">(sAdminCall)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+send an <a href="TaminoApi.html#M000003">admin</a> command to Tamino
+</p>
+<table>
+<tr><td valign="top">sAdminCall (string, in):</td><td>name of the <a href="TaminoApi.html#M000003">admin</a> function including
+parameters
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success, false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000004.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000004.html');return false;">
+          <span class="method-name">closeCursor</span><span class="method-args">(sCursorHandle)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+close the cursor identified by the given handler
+</p>
+<table>
+<tr><td valign="top">sCursorHandle (string, in):</td><td>name of the last cursor handle
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000005.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000005.html');return false;">
+          <span class="method-name">commit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+send a <a href="TaminoApi.html#M000005">commit</a> command
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000006.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000006.html');return false;">
+          <span class="method-name">define</span><span class="method-args">(sSchema)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="TaminoApi.html#M000006">define</a> the given XML Schema
+</p>
+<table>
+<tr><td valign="top">sSchema (string, in):</td><td>the XML Schema
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000007.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000007.html');return false;">
+          <span class="method-name">delete</span><span class="method-args">(sInput)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+send a <a href="TaminoApi.html#M000007">delete</a> request to Tamino
+</p>
+<table>
+<tr><td valign="top">sInput (string, in):</td><td>X-Query epxression describing the document to be deleted
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000008.html');return false;">
+          <span class="method-name">diagnose</span><span class="method-args">(sFunctionName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+send a <a href="TaminoApi.html#M000008">diagnose</a> command to Tamino
+</p>
+<table>
+<tr><td valign="top">sFunctionName (string, in):</td><td>name of the <a href="TaminoApi.html#M000008">diagnose</a> command
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000009.html');return false;">
+          <span class="method-name">endSession</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+end the current session
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error, if no session is currently
+active
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000010.html');return false;">
+          <span class="method-name">fetchCursor</span><span class="method-args">(sCursorHandle, iPosition, iQuantity)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+fetch the data according to the given cursor parameters
+</p>
+<table>
+<tr><td valign="top">sCursorHandle (string, in):</td><td>the handle string of the cursor
+
+</td></tr>
+<tr><td valign="top">iPosition (integer, in):</td><td>position where 1 is the first
+
+</td></tr>
+<tr><td valign="top">iQuantity (integer, in):</td><td>number of documents to return
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success, false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000011.html');return false;">
+          <span class="method-name">getCursorHandle</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the handle of the last opened cursor
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>CursorHandle|boolean cursor handle or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000012.html');return false;">
+          <span class="method-name">getFullResultBody</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get result body as a string
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>ResultBody|boolean result body or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000013.html');return false;">
+          <span class="method-name">getFullResultDom</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get a DOM representing the response document returned from Tamino
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>* domDocumentNode|boolean pointer to the document node or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000014.html');return false;">
+          <span class="method-name">getFullResultHeader</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get result header as a string
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>ResultHeader|boolean result header or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000015.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000015.html');return false;">
+          <span class="method-name">getHeaderHttpServerName</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the Http server name from the Tamino header response - this method will
+only return a correct value after a request has already been sent to Tamino
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean|string http server name or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000016.html');return false;">
+          <span class="method-name">getHeaderMessageText</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the text message from the Tamino header response - this method will
+only return a correct value after a request has already been sent to Tamino
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean|string text message or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000017.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000017.html');return false;">
+          <span class="method-name">getHeaderReason</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the error reason from the Tamino header response - this method will
+only return a correct value after a request has already been sent to Tamino
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean|string reason or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000018.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000018.html');return false;">
+          <span class="method-name">getHeaderResponse</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the reponse from the header
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean ReturnValue on true or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000019.html');return false;">
+          <span class="method-name">getHeaderReturnResponse</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the X-INO-returnvalue or the X-INO-responseWrapper from the Tamino
+server - this method will only return a correct value after a request has
+already been sent to Tamino
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean|integer|string returnvalue from Tamino (0 for OK or another number
+for an error)
+
+<pre>
+                      or responsewrapper from Tamino or false on error
+</pre>
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000020.html');return false;">
+          <span class="method-name">getHeaderXmlServerVersion</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the Tamino version from the header
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean|string version or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000021.html');return false;">
+          <span class="method-name">getResultDomNode</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the result node in the DOM repesenting the response document returned
+from Tamino
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>* domResultNode|boolean pointer to the result node or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000022.html');return false;">
+          <span class="method-name">getResultHttpCode</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the HTTP response code of the last sent request
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>string HTTP response code
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000023.html');return false;">
+          <span class="method-name">getResultMessageCode1</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the first message code from the Tamino response
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>integer first message code
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000024.html');return false;">
+          <span class="method-name">getResultMessageCode2</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the second message code from the Tamino response
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>integer second message code
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000025.html');return false;">
+          <span class="method-name">getResultMessageLine1</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the first messageline text from the Tamino response
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>string first messageline text
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000026.html');return false;">
+          <span class="method-name">getResultMessageLine2</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the second messageline text from the Tamino response
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>string second messageline text
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000027.html');return false;">
+          <span class="method-name">getResultMessageText1</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the first message text from the Tamino response
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>string first message text
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000028.html');return false;">
+          <span class="method-name">getResultMessageText2</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the second message text from the Tamino response
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>string second message text
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000029.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000029.html');return false;">
+          <span class="method-name">getRootDomNode</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get the root node in the DOM repesenting the response document returned
+from Tamino
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>* domRootNode|boolean the root node or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000030.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000030.html');return false;">
+          <span class="method-name">isDomCreated</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+check the presence of a domResultBody
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true if DOM has been created or false otherwise
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000031.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000031.html');return false;">
+          <span class="method-name">openCursor</span><span class="method-args">(sScroll, sSensitive)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+open a cursor with the given parameters and return the cursor handler
+</p>
+<table>
+<tr><td valign="top">sScroll (string, in):</td><td>value for the _SCROLL parameter: &quot;yes&quot; or &quot;no&quot;
+
+</td></tr>
+<tr><td valign="top">sSensitive (string, in):</td><td>value for the _SENSITIVE parameter: &quot;vague&quot; or &quot;no&quot;
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000032" class="method-detail">
+        <a name="M000032"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000032.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000032.html');return false;">
+          <span class="method-name">plainUrlAddressing</span><span class="method-args">(sQuery)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+send a plain URL addressing request to Tamino, starting with the doctype
+name, e.g. &quot;nonXML/@3&quot; will get the document with
+ino:id=&quot;3&quot; in the doctype &quot;nonXML&quot;
+</p>
+<table>
+<tr><td valign="top">sQuery (string, in):</td><td>plain URL addressing request
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000033" class="method-detail">
+        <a name="M000033"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000033.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000033.html');return false;">
+          <span class="method-name">process</span><span class="method-args">(sInput)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+send the given data to Tamino via the &quot;_process&quot; command
+</p>
+<table>
+<tr><td valign="top">sInput (string, in):</td><td>data to be stored in Tamino
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000034.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000034.html');return false;">
+          <span class="method-name">query</span><span class="method-args">(sQuery)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+send an X-Query <a href="TaminoApi.html#M000034">query</a> to Tamino
+</p>
+<table>
+<tr><td valign="top">sQuery (string, in):</td><td>X-Query <a href="TaminoApi.html#M000034">query</a>
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000035.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000035.html');return false;">
+          <span class="method-name">rollback</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+send a <a href="TaminoApi.html#M000035">rollback</a> command
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000036.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000036.html');return false;">
+          <span class="method-name">setCollection</span><span class="method-args">(sCollection)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set the name of the collection which should be used for the following
+requests
+</p>
+<table>
+<tr><td valign="top">sCollection (string, in):</td><td>name or the collection
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>void
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000037.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000037.html');return false;">
+          <span class="method-name">setContentTransferEncoding</span><span class="method-args">(sContentTransferEncoding)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set the content transfer encoding used in POST requests; by default no
+encoding is used
+</p>
+<table>
+<tr><td valign="top">sContentTransferEncoding (string, in):</td><td>any one of &quot;base64&quot; or &quot;binary&quot;
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>void
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000038.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000038.html');return false;">
+          <span class="method-name">setDefineMode</span><span class="method-args">(sMethod)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set the method used when defining a schema
+</p>
+<table>
+<tr><td valign="top">sMethod (string, in):</td><td>method: TAMINO_DEFINE_MODE_NORMAL, TAMINO_DEFINE_MODE_VALIDATE,
+TAMINO_DEFINE_MODE_TEST, TAMINO_DEFINE_MODE_VALIDATETEST
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>void
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000039.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000039.html');return false;">
+          <span class="method-name">setEncoding</span><span class="method-args">(sEncoding)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set the character encoding, e.g. &quot;ISO-8859-1&quot; or
+&quot;UTF-8&quot;
+</p>
+<table>
+<tr><td valign="top">sEncoding (string, in):</td><td>the character encoding as string
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>void
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000040.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000040.html');return false;">
+          <span class="method-name">setHttpRequestMethod</span><span class="method-args">(sMethod)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set the HTTP request method used for requests except for queries via <a
+href="TaminoApi.html#M000034">query</a>() or <a
+href="TaminoApi.html#M000049">xquery</a>()
+</p>
+<table>
+<tr><td valign="top">sMethod (string, in):</td><td>request method, currently &quot;POST&quot; or &quot;GET&quot;
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000041.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000041.html');return false;">
+          <span class="method-name">setIsolationLevel</span><span class="method-args">(sLevel)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set the isolationLevel of a session with the given value
+</p>
+<table>
+<tr><td valign="top">sLevel (string, in):</td><td>name of the isolationLevel to <a href="TaminoApi.html#M000006">define</a>:
+&quot;uncommittedDocument&quot;, &quot;committedCommand&quot;,
+&quot;stableCursor&quot;, &quot;stableDocument&quot; or
+&quot;serializable&quot;
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000042.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000042.html');return false;">
+          <span class="method-name">setLockMode</span><span class="method-args">(sMode)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="TaminoApi.html#M000006">define</a> the lockMode of a session with
+the given value
+</p>
+<table>
+<tr><td valign="top">sMode (string, in):</td><td>name of the lockMode to <a href="TaminoApi.html#M000006">define</a>:
+&quot;unprotected&quot;, &quot;shared&quot; or &quot;protected&quot;
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000043.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000043.html');return false;">
+          <span class="method-name">setLockWait</span><span class="method-args">(sWait)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="TaminoApi.html#M000006">define</a> the lockWait of a session with
+the given value
+</p>
+<table>
+<tr><td valign="top">sWait (string, in):</td><td>name of the lockWait to <a href="TaminoApi.html#M000006">define</a>:
+&quot;yes&quot; or &quot;no&quot;
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000044.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000044.html');return false;">
+          <span class="method-name">setMediaType</span><span class="method-args">(sMediaType)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set the type of media of a document
+</p>
+<table>
+<tr><td valign="top">sMediaType (string, in):</td><td>MIME type
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000045" class="method-detail">
+        <a name="M000045"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000045.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000045.html');return false;">
+          <span class="method-name">setPassword</span><span class="method-args">(sAuthPassword)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set the password in the current object
+</p>
+<table>
+<tr><td valign="top">sAuthPassword (string, in):</td><td>password of the database user
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000046.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000046.html');return false;">
+          <span class="method-name">setUsername</span><span class="method-args">(sAuthUsername)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set the username in the current object - note that only one user is allowed
+to access Tamino within one session, so care needs to be taken not to
+change the username within one active session
+</p>
+<table>
+<tr><td valign="top">sAuthUsername (string, in):</td><td>login of the database user
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000047.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000047.html');return false;">
+          <span class="method-name">startSession</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+start a <a href="TaminoApi.html#M000001">new</a> session
+</p>
+<table>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000048.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000048.html');return false;">
+          <span class="method-name">undefine</span><span class="method-args">(sSchema)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="TaminoApi.html#M000048">undefine</a> the Schema with the given
+name
+</p>
+<table>
+<tr><td valign="top">sSchema (string, in):</td><td>name of the Schema to <a href="TaminoApi.html#M000048">undefine</a>
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+          <a href="TaminoApi.src/M000049.html" target="Code" class="method-signature"
+            onclick="popupCode('TaminoApi.src/M000049.html');return false;">
+          <span class="method-name">xquery</span><span class="method-args">(sQuery)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+send an XQuery <a href="TaminoApi.html#M000034">query</a> to Tamino
+</p>
+<table>
+<tr><td valign="top">sQuery (string, in):</td><td>XQuery <a href="TaminoApi.html#M000034">query</a>
+
+</td></tr>
+<tr><td valign="top">Type of access:</td><td>public
+
+</td></tr>
+<tr><td valign="top">Returns:</td><td>boolean true on success or false on error
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Datei: app/views/layouts/standard.rhtml -->
+<html>
+        <head>
+                <title>TaminoOnRails</title>
+		    <%= stylesheet_link_tag 'styles' %>
+        </head>
+        <body>
+
+        <%= display_standard_flashes %>
+
+        <%= @content_for_layout %>
+        </body>
+</html>

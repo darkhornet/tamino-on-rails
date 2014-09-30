@@ -1,0 +1,86 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<xs:schema xmlns:xs = "http://www.w3.org/2001/XMLSchema" xmlns:tsd = "http://namespaces.softwareag.com/tamino/TaminoSchemaDefinition">
+  <xs:annotation>
+    <xs:appinfo>
+      <tsd:schemaInfo name = "people">
+        <tsd:collection name = "people"></tsd:collection>
+        <tsd:doctype name = "person">
+          <tsd:logical>
+            <tsd:content>closed</tsd:content>
+          </tsd:logical>
+        </tsd:doctype>
+      </tsd:schemaInfo>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name = "person">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name = "name">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name = "firstName" type = "xs:string">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <tsd:elementInfo>
+                      <tsd:physical>
+                        <tsd:native>
+                          <tsd:index>
+                            <tsd:standard></tsd:standard>
+                          </tsd:index>
+                        </tsd:native>
+                      </tsd:physical>
+                    </tsd:elementInfo>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name = "middleName" type = "xs:string" minOccurs = "0"></xs:element>
+              <xs:element name = "lastName" type = "xs:string">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <tsd:elementInfo>
+                      <tsd:physical>
+                        <tsd:native>
+                          <tsd:index>
+                            <tsd:standard></tsd:standard>
+                          </tsd:index>
+                        </tsd:native>
+                      </tsd:physical>
+                    </tsd:elementInfo>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name = "address" minOccurs = "0">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name = "street" minOccurs = "0">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name = "name" type = "xs:string"></xs:element>
+                    <xs:element name = "number" type = "xs:string" minOccurs = "0"></xs:element>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name = "city" type = "xs:string" minOccurs = "0"></xs:element>
+              <xs:element name = "zipCode" type = "xs:string" minOccurs = "0"></xs:element>
+              <xs:element name = "country" type = "xs:string" minOccurs = "0"></xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name = "email" type = "xs:string" minOccurs = "0"></xs:element>
+        <xs:element name = "phone" minOccurs = "0">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name = "home" type = "xs:string" minOccurs = "0"></xs:element>
+              <xs:element name = "work" type = "xs:string" minOccurs = "0"></xs:element>
+              <xs:element name = "mobile" type = "xs:string" minOccurs = "0"></xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name = "birthDate" type = "xs:date" minOccurs = "0"></xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

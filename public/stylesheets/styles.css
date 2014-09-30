@@ -1,0 +1,111 @@
+/*
+selfhtml.css
+
+Wenn die Schriftgroessen von SELFHTML fuer Sie schwer lesbar sind
+und Sie SELFHTML lokal lesen, benennen Sie diese Datei
+um in selfnormal.css und benennen Sie die Datei
+selfnosize.css im src-Verzeichnis um in selfhtml.css
+*/
+
+body { color:black; background-color:white; }
+#dianz, #granz,  #tour { background-color:#EEEEEE; }
+
+body,h1,h2,h3,h4,p,ul,ol,li,dl,dt,dd,div,td,th,address,blockquote { font-family:Arial,sans-serif; }
+
+h1 { font-size:26px; margin-bottom:18px; }
+
+h1.ph1 { font-size:21px; margin-bottom:18px; }
+
+h2 { font-size:21px; margin-bottom:18px; }
+
+h3 { font-size:16px; }
+
+h4 { font-size:13.4px; }
+
+p,ul,ol,li,dl,dt,dd,div,td,th,address,blockquote { font-size:13.4px; }
+
+li,dt { margin-top:3px; }
+
+pre { font-family:"Courier New",Courier,monospace; font-size:13.4px; color:#0000C0; background-color:#FFFFE0; border:10px solid #EEEEEE; padding:10px; white-space:pre; }
+
+td pre { border-style:none; padding:0; }
+
+code,kbd,tt { font-family:"Courier New",Courier,monospace; color:#0000C0; }
+
+var { font-style:normal; color:#0000C0; }
+
+blockquote,cite { font-style:italic; }
+
+.xmpcode { border-width:10px; border-style:solid; border-color:#EEEEEE; background-color:#FFFFE0; }
+
+.reftable { border:1px solid #C0C0C0; border-collapse:collapse; background-color:#FFFFFF; }
+
+.reftable th { background-color:#EEEEEE; text-align:left; vertical-align:top; }
+
+.reftable td { border:1px solid #C0C0C0; }
+
+.code { background-color:#FFFFE0; vertical-align:top; }
+
+.codemh40 { background-color:#FFFFE0; height:40px; vertical-align:middle; }
+
+.tabxpl { background-color:#E4EEFF; vertical-align:top; }
+
+.tabxplm { background-color:#E4EEFF; vertical-align:middle; }
+
+.doc, .doctop, .docbot, .form, .impr { background-color:#EEEEEE; }
+
+.doc { vertical-align:middle; }
+
+p.doc { padding:5px 8px; border:none; margin:0; }
+
+.doctop { vertical-align:top; text-align:center; }
+
+.doctop h2 { text-align:left; margin-top:1.5em; }
+
+.docbot { vertical-align:bottom; width:100%; }
+
+.nav { background-color:#FFEEDD; }
+
+.qbar { background-color:#FFFFE0; font-size:13.4px; font-family:Arial,sans-serif; }
+
+.blue { color:#0000C0; }
+
+pre.normal { color:#000000; }
+
+a:link { color:#AA5522; font-weight:bold; text-decoration:underline; }
+
+a:visited { color:#772200; font-weight:bold; text-decoration:underline; }
+
+a:active { color:#000000; font-weight:bold; text-decoration:none; }
+
+a.an { text-decoration:none; }
+
+.unicode { font-size:15px; font-family:"Arial Unicode MS",Arial,sans-serif; }
+
+dt,ins { color:#009900; font-weight:bold; text-decoration:none; }
+
+del { color:#990000; font-weight:bold; text-decoration:line-through; }
+
+a.navh { font-weight:normal; }
+
+#mirror-impressum {
+       margin-top:0.75em;
+       margin-bottom:0.75em;
+       padding:0.5em;
+       background-color:#EEEEEE;
+       text-align:right;
+}
+
+#originaladresse {
+       margin-bottom:0.5em;
+       padding:0.5em;
+       background-color:#EEEEEE;
+}
+
+#mirror-impressum a:link, #mirror-impressum a:visited, #mirror-impressum a:active,
+#originaladresse a:link, #originaladresse a:visited, #originaladresse a:active
+{
+       color:#000000;
+       font-weight:bold;
+       text-decoration:underline;
+}
